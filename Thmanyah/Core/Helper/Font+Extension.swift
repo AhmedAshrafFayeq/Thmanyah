@@ -9,6 +9,7 @@ import SwiftUI
 
 enum FontFamily {
     case bold
+    case semiBold
     case regular
     case medium
     case thin
@@ -17,6 +18,10 @@ enum FontFamily {
 extension Font {
     static func ibmArabicBold(_ size: CGFloat) -> Font {
         .custom("IBMPlexSansArabic-Bold", size: size)
+    }
+
+    static func ibmArabicSemiBold(_ size: CGFloat) -> Font {
+        .custom("IBMPlexSansArabic-SemiBold", size: size)
     }
 
     static func ibmArabicRegular(_ size: CGFloat) -> Font {
@@ -35,6 +40,8 @@ extension Font {
         switch family {
         case .bold:
             return .ibmArabicBold(size)
+        case .semiBold:
+            return .ibmArabicSemiBold(size)
         case .regular:
             return .ibmArabicRegular(size)
         case .medium:

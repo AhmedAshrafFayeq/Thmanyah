@@ -26,7 +26,6 @@ struct BigSquareView: View {
                         )
                     }
                 }
-                .padding(.horizontal)
             }
         }
         .frame(height: 240)
@@ -38,7 +37,7 @@ struct BigSquareViewCardView: View {
     let cardWidth: CGFloat
 
     var body: some View {
-        HStack(spacing: 15) {
+        VStack(spacing: 12) {
             if let avatarURL = item.avatarURL,
                let url = URL(string: avatarURL) {
                 AsyncImage(url: url) { image in
@@ -48,13 +47,13 @@ struct BigSquareViewCardView: View {
                 } placeholder: {
                     Color.gray
                 }
-                .frame(width: 150, height: 200)
+                .frame(height: 150)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
 
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(item.name ?? "")
-                    .font(.appFont(size: 18, .bold))
+                    .font(.appFont(size: 18, .semiBold))
                     .lineLimit(2)
                     .foregroundColor(.white)
 
@@ -65,14 +64,14 @@ struct BigSquareViewCardView: View {
                         .lineLimit(3)
                 }
 
-                Text("5 hours ago")
+                Text((item.releaseDate ?? "").toFormattedDate())
                     .font(.appFont(size: 12))
                     .foregroundColor(.gray)
             }
 
             Spacer(minLength: 0)
         }
-        .padding()
+        .padding(8)
         .background(Color("#272937"))
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .frame(width: cardWidth)

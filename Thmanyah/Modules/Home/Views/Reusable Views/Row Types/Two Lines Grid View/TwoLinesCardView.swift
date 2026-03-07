@@ -1,32 +1,12 @@
 //
-//  TwoLinesGridView.swift
+//  TwoLinesCardView.swift
 //  Thmanyah
 //
-//  Created by Ahmed.Abdraboh on 06/03/2026.
+//  Created by Ahmed.Abdraboh on 07/03/2026.
 //
 
 import SwiftUI
 
-struct TwoLinesGridView: View {
-    var items: [ContentData]
-
-    let rows = [
-        GridItem(.fixed(85), spacing: 12),
-        GridItem(.fixed(85), spacing: 12)
-    ]
-
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: rows, spacing: 16) {
-                ForEach(items, id: \.id) { item in
-                    TwoLinesCardView(item: item)
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Enhanced Card Sub-view
 struct TwoLinesCardView: View {
     let item: ContentData
 
@@ -105,18 +85,5 @@ struct TwoLinesCardView: View {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full
         return formatter.localizedString(for: date, relativeTo: Date())
-    }
-}
-
-// MARK: - Fallback Image View
-struct FallbackSquareImage: View {
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color(white: 0.15))
-            Image(systemName: "play.rectangle")
-                .foregroundColor(.gray)
-        }
-        .frame(width: 65, height: 65)
     }
 }

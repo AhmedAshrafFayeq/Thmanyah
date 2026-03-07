@@ -34,7 +34,7 @@ struct SplashView<Content: View>: View {
                     .frame(width: 160)
                     .opacity(opacity)
                     .onAppear {
-                        withAnimation(.easeIn(duration: 1.2)) {
+                        withAnimation(.easeIn(duration: 0.5)) {
                             opacity = 1.0
                         }
                     }

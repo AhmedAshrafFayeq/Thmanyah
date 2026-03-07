@@ -45,7 +45,7 @@ struct PodcastCardView: View {
             .overlay(alignment: .bottomTrailing) {
                 Image(systemName: "play.fill")
                     .foregroundColor(.white)
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.appFont(size: 12, .bold))
                     .padding(8)
                     .background(Color.black.opacity(0.6))
                     .clipShape(Circle())
@@ -72,12 +72,12 @@ struct PodcastCardView: View {
 
                     if let episodes = item.episodeCount {
                         Label("\(episodes)", systemImage: "music.note.list")
-                            .font(.caption)
+                            .font(.appFont(size: 12))
                     }
 
                     if let duration = item.duration {
                         Label(duration.formattedDuration, systemImage: "clock")
-                            .font(.caption)
+                            .font(.appFont(size: 12))
                     }
                 }
                 .foregroundColor(.gray)

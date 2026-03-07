@@ -11,9 +11,16 @@ import SwiftUI
 struct ThmanyahApp: App {
     var body: some Scene {
         WindowGroup {
-            let homeUseCase = DefaultHomeUseCase(homeRepository: HomeRepository(homeService: HomeService()))
+            let homeUseCase = DefaultHomeUseCase(
+                homeRepository: HomeRepository(
+                    homeService: HomeService()
+                )
+            )
             let viewModel = HomeViewModel(homeUseCase: homeUseCase)
-            HomeView(viewModel: viewModel)
+
+            SplashView {
+                HomeView(viewModel: viewModel)
+            }
         }
     }
 }

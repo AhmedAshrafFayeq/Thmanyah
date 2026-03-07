@@ -14,7 +14,7 @@ struct TwoLinesGridView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(
                 rows: [GridItem(.flexible()), GridItem(.flexible())], // Ensure fixed heights for rows
-                spacing: 15
+                spacing: 12
             ) {
                 ForEach(items, id: \.id) { item in
                     TwoLinesCardView(item: item)
@@ -42,17 +42,24 @@ struct TwoLinesCardView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
 
-            VStack(alignment: .leading, spacing: 8) {
-                Text("5 hours ago")
-                    .font(.caption)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(item.podcastName ?? "")
+                    .font(.appFont(size: 14, .semiBold))
                     .foregroundColor(.gray)
 
                 Text(item.name ?? "")
-                    .font(.subheadline)
+                    .font(.appFont(size: 10))
                     .foregroundColor(.gray)
                     .lineLimit(2)
             }
             Spacer()
+
+            Image(systemName: "play.fill")
+                .foregroundColor(.white)
+                .font(.system(size: 12, weight: .bold))
+                .padding(8)
+                .background(Color.black.opacity(0.6))
+                .clipShape(Circle())
         }
         .padding(10)
         .background(Color("#272937"))

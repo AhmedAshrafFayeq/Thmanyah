@@ -13,16 +13,15 @@ struct SectionHeaderView: View {
 
     var body: some View {
         HStack {
-            Text("\(title) (\(type))")
-                .font(.headline)
+            Text("\(title)")
+                .font(.appFont(size: 18, .semiBold))
                 .foregroundColor(.white)
             Spacer()
-            Image(systemName: "chevron.right")
+            Image(systemName: "chevron.forward")
                 .foregroundColor(.white)
-                .font(.system(size: 18, weight: .bold))
                 .padding(.leading, 20)
         }
-        .padding()
+        .padding(.horizontal, 20)
         .background(Color("#141520")) // Explicit background for floating behavior
         .listRowInsets(EdgeInsets()) // Ensure no default insets
     }

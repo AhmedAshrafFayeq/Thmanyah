@@ -12,7 +12,7 @@ struct SquareView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView(.horizontal, showsIndicators: false) { // Enable horizontal scrolling
-                LazyHStack {
+                LazyHStack(spacing: 12) {
                     ForEach(items, id: \.id) { item in
                         VStack(alignment: .leading) {
                             if let avatarURL = item.avatarURL {
@@ -21,12 +21,12 @@ struct SquareView: View {
                                 } placeholder: {
                                     Color.gray
                                 }
-                                .frame(height: 80)
+                                .frame(height: 100)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
                             Text("\(item.name ?? "") episodes")
                                 .foregroundColor(.gray)
-                                .font(.caption)
+                                .font(.appFont(size: 12))
                         }
                         .frame(width: 120)
                     }

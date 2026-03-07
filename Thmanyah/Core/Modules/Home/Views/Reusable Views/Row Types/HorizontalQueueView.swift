@@ -8,25 +8,83 @@
 import SwiftUI
 
 struct HorizontalQueueView: View {
-    var items: [ContentData] // Array of item titles
+    var items: [ContentData]
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
+            HStack(spacing: 16) {
                 ForEach(items, id: \.id) { item in
-                    Text(item.name ?? "")
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(20)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-                        )
+                    PodcastCardView(item: item)
                 }
             }
-            .padding(.horizontal, 15)
         }
     }
 }
+
+
+struct PodcastCardView: View {
+    let item: ContentData
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+
+            // Podcast Image
+            AsyncImage(url: URL(string: item.avatarURL ?? "")) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+            } placeholder: {
+                ZStack {
+                    Color.gray.opacity(0.2)
+                    ProgressView()
+                }
+            }
+            .frame(width: 180, height: 180)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+
+            .overlay(alignment: .bottomTrailing) {
+                Image(systemName: "play.fill")
+                    .foregroundColor(.white)
+                    .font(.system(size: 12, weight: .bold))
+                    .padding(8)
+                    .background(Color.black.opacity(0.6))
+                    .clipShape(Circle())
+                    .padding(.trailing, 8)
+                    .padding(.bottom, 8)
+            }
+
+            VStack(alignment: .leading, spacing: 6) {
+
+                // Podcast Name
+                Text(item.name ?? "")
+                    .foregroundColor(.white)
+                    .font(.appFont(size: 14, .semiBold))
+                    .lineLimit(1)
+
+                // Description
+                Text(item.description ?? "")
+                    .font(.appFont(size: 10))
+                    .foregroundColor(.gray)
+                    .lineLimit(2)
+
+                // Episodes + Duration
+                HStack(spacing: 6) {
+
+                    if let episodes = item.episodeCount {
+                        Label("\(episodes)", systemImage: "music.note.list")
+                            .font(.caption)
+                    }
+
+                    if let duration = item.duration {
+                        Label(duration.formattedDuration, systemImage: "clock")
+                            .font(.caption)
+                    }
+                }
+                .foregroundColor(.gray)
+
+            }
+        }
+        .frame(width: 180)
+    }
+}
+

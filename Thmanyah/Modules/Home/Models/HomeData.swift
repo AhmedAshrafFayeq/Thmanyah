@@ -28,7 +28,7 @@ struct PaginationData: Codable {
 
 // MARK: - Section
 
-struct SectionData: Codable, Equatable , Hashable {
+struct SectionData: Codable, Equatable, Hashable, Identifiable {
     var id = UUID()
     var name: String?
     var contentType: ContentTypeEnum?
@@ -45,7 +45,7 @@ struct SectionData: Codable, Equatable , Hashable {
 
 // MARK: - Content
 
-struct ContentData: Codable, Equatable , Hashable {
+struct ContentData: Codable, Equatable, Hashable, Identifiable {
     var id: String = UUID().uuidString
     var podcastID, name, description: String?
     var avatarURL: String?
